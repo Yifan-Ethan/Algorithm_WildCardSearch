@@ -19,7 +19,6 @@ namespace Algorithms_WildCardSearch
             Console.WriteLine("Naive solution: " + elapsedMs_naive + " milliseconds");
             Console.WriteLine("Three Step Iterative Partial Search: " + elapsedMs_TSIPS + " milliseconds");
             Console.WriteLine("State Machine: " + elapsedMs_SM + " milliseconds");
-            Console.WriteLine();
 
             //End
             Console.ReadKey();

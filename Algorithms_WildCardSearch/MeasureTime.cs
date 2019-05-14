@@ -9,7 +9,9 @@ namespace Algorithms_WildCardSearch
             var watch = System.Diagnostics.Stopwatch.StartNew();
             for (int i = 0; i < iterations; i++)
             {
-                f("ABC%EF%GHI%MNQ%XYZ", "ABCDEFGHIJKLMNQRSTUVWXYZ");
+                string search = OtherAlgorithms.RandomSearchString(10);
+                string value = OtherAlgorithms.RandomString(10);
+                f(search, value);
             }
             watch.Stop();
             return watch.ElapsedMilliseconds;

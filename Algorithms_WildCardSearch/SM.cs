@@ -13,19 +13,22 @@ namespace Algorithms_WildCardSearch
             End
         }
 
-        public static Boolean Run(string a, string b)
+        public static Boolean Run(string search, string value)
         {
+            char[] searchCharArr = search.ToCharArray();
+            char[] valueCharArr = value.ToCharArray();
+
             var state = EvalState.Start;
             var search_index = 0;
-            var column_index = 0;
+            var value_index = 0;
             var match = true;
 
             while (state != EvalState.End)
             {
                 //If column string length is shorter than search value length
-                if (column_index >= b.Length) return CheckTrailingPercent(a.Substring(search_index));
+                if (value_index >= valueCharArr.Length) return CheckTrailingPercent(OtherAlgorithms.SubCharArray(searchCharArr, search_index));
 
-                state = IdentifyState(a[RestrainSearchIndex(search_index, a.Length)], search_index.Equals(a.Length));
+                state = IdentifyState(searchCharArr[RestrainSearchIndex(search_index, searchCharArr.Length)], search_index.Equals(searchCharArr.Length));
 
                 switch (state)
                 {
@@ -33,39 +36,45 @@ namespace Algorithms_WildCardSearch
                         break;
 
                     case EvalState.Character:
-                        match = a[search_index] == b[column_index];
+                        match = searchCharArr[search_index] == valueCharArr[value_index];
                         search_index++;
-                        column_index++;
+                        value_index++;
                         break;
 
                     case EvalState.Percent:
-                        search_index = search_index + NextNonPercentIndex(a.Substring(search_index));
-                        if (search_index >= a.Length) return true; //Trailing characters of search value consist only of %
-                        int search_chars = NextPercentIndex(a.Substring(search_index));
+                        search_index = search_index + NextNonPercentIndex(OtherAlgorithms.SubCharArray(searchCharArr, search_index));
+                        if (search_index >= searchCharArr.Length) return true; //Trailing characters of search value consist only of %
+
+                        var search_remaining = OtherAlgorithms.SubCharArray(searchCharArr, search_index);
+                        var column_remaining = OtherAlgorithms.SubCharArray(valueCharArr, value_index);
+
+                        //Checks trailing characters when no more percent symbols are found
+                        int search_chars = NextPercentIndex(OtherAlgorithms.SubCharArray(searchCharArr, search_index));
                         if (search_chars == -1)
                         {
-                            if (CompareTrailingCharacters(a.Substring(search_index), b.Substring(column_index))) return true;
+                            if (CompareTrailingCharacters(search_remaining, column_remaining)) return true;
                             else return false;
                         }
 
-                        var a_block = a.Substring(search_index, search_chars);
-                        var b_searchscope = b.Substring(column_index);
-
-                        int matchingindex = OtherAlgorithms.WildcardContains(b_searchscope, a_block);
+                        //Check if current section of search exists in value
+                        var a_block = OtherAlgorithms.SubCharArray(searchCharArr, search_index, search_chars);
+                        int matchingindex = OtherAlgorithms.WildcardContains(a_block, column_remaining);
                         if (matchingindex == -1) return false;  //Substring of search value does not exist in column value
+
+                        //Advance index pointers
                         search_index = search_index + search_chars;
-                        column_index = column_index + matchingindex + a_block.Length;
+                        value_index = value_index + matchingindex + a_block.Length;
                         break;
 
                     case EvalState.Underscore:
                         search_index++;
-                        column_index++;
+                        value_index++;
                         break;
                 }
                 if (!match) return false;
             }
 
-            if(column_index == b.Length)
+            if(value_index == value.Length)
             {
                 return true;
             }
@@ -83,7 +92,7 @@ namespace Algorithms_WildCardSearch
             return EvalState.Character;
         }
 
-        private static Boolean CheckTrailingPercent(String search)
+        private static Boolean CheckTrailingPercent(char[] search)
         {
             for (int i = 0; i < search.Length; i++)
             {
@@ -98,7 +107,7 @@ namespace Algorithms_WildCardSearch
             return search_index;
         }
 
-        private static int NextNonPercentIndex(String search)
+        private static int NextNonPercentIndex(char[] search)
         {
             for (int i = 0; i < search.Length; i++)
             {
@@ -107,7 +116,7 @@ namespace Algorithms_WildCardSearch
             return search.Length;
         }
 
-        private static int NextPercentIndex(String search)
+        private static int NextPercentIndex(char[] search)
         {
             for (int i = 0; i < search.Length; i++)
             {
@@ -116,9 +125,13 @@ namespace Algorithms_WildCardSearch
             return -1;
         }
 
-        private static Boolean CompareTrailingCharacters(String s, String v)
+        private static Boolean CompareTrailingCharacters(char[] s, char[] v)
         {
-            v = v.Substring(v.Length - s.Length);
+            int v_length = v.Length - s.Length;
+
+            if (v_length < 0) return false;
+
+            v = OtherAlgorithms.SubCharArray(v, v_length);
 
             var search_index = 0;
             var column_index = 0;

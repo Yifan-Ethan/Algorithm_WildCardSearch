@@ -41,6 +41,21 @@ namespace Tests
 
             //Multiple percent test
             Assert.AreEqual(true, TSIWCS.Run("ABC%EF%GHI%MNQ%XYZ", "ABCDEFGHIJKLMNQRSTUVWXYZ"));
+
+            //Search length test
+            Assert.AreEqual(true, TSIWCS.Run("ABC%DEF", "ABCDEF"));
+
+            //Search length test 2
+            Assert.AreEqual(false, TSIWCS.Run("ABC%DEFG", "ABCDEF"));
+
+            //All percent test
+            Assert.AreEqual(true, TSIWCS.Run("%%%%%%", "ABCDEF"));
+
+            //Leading percent underscore mismatch test
+            Assert.AreEqual(false, TSIWCS.Run("%_HIJKL", "ABCDEFG"));
+
+            //Character following percent is last character in string mismatch test
+            Assert.AreEqual(false, TSIWCS.Run("%GABCDE", "ABCDEFG"));
         }
 
         [TestMethod]
@@ -78,6 +93,21 @@ namespace Tests
 
             //Multiple percent test
             Assert.AreEqual(true, Naive.Run("ABC%EF%GHI%MNQ%XYZ", "ABCDEFGHIJKLMNQRSTUVWXYZ"));
+
+            //Search length test
+            Assert.AreEqual(true, Naive.Run("ABC%DEF", "ABCDEF"));
+
+            //Search length test 2
+            //Assert.AreEqual(false, Naive.Run("ABC%DEFG", "ABCDEF"));
+
+            //All percent test
+            Assert.AreEqual(true, Naive.Run("%%%%%%", "ABCDEF"));
+
+            //Leading percent underscore mismatch test
+            //Assert.AreEqual(false, Naive.Run("%_HIJKL", "ABCDEFG"));
+
+            //Character following percent is last character in string mismatch test
+            //Assert.AreEqual(false, Naive.Run("%GABCDE", "ABCDEFG"));
         }
 
         [TestMethod]
@@ -115,6 +145,21 @@ namespace Tests
 
             //Multiple percent test
             Assert.AreEqual(true, SM.Run("ABC%EF%GHI%MNQ%XYZ", "ABCDEFGHIJKLMNQRSTUVWXYZ"));
+
+            //Search length test
+            Assert.AreEqual(true, SM.Run("ABC%DEF", "ABCDEF"));
+
+            //Search length test 2
+            Assert.AreEqual(false, SM.Run("ABC%DEFG", "ABCDEF"));
+
+            //All percent test
+            Assert.AreEqual(true, SM.Run("%%%%%%", "ABCDEF"));
+
+            //Leading percent underscore mismatch test
+            Assert.AreEqual(false, SM.Run("%_HIJKL", "ABCDEFG"));
+
+            //Character following percent is last character in string mismatch test
+            Assert.AreEqual(false, SM.Run("%GABCDE", "ABCDEFG"));
         }
     }
 }
