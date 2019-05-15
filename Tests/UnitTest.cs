@@ -98,16 +98,16 @@ namespace Tests
             Assert.AreEqual(true, Naive.Run("ABC%DEF", "ABCDEF"));
 
             //Search length test 2
-            //Assert.AreEqual(false, Naive.Run("ABC%DEFG", "ABCDEF"));
+            Assert.AreEqual(false, Naive.Run("ABC%DEFG", "ABCDEF"));
 
             //All percent test
             Assert.AreEqual(true, Naive.Run("%%%%%%", "ABCDEF"));
 
             //Leading percent underscore mismatch test
-            //Assert.AreEqual(false, Naive.Run("%_HIJKL", "ABCDEFG"));
+            Assert.AreEqual(false, Naive.Run("%_HIJKL", "ABCDEFG"));
 
             //Character following percent is last character in string mismatch test
-            //Assert.AreEqual(false, Naive.Run("%GABCDE", "ABCDEFG"));
+            Assert.AreEqual(false, Naive.Run("%GABCDE", "ABCDEFG"));
         }
 
         [TestMethod]

@@ -14,6 +14,8 @@ namespace Algorithms_WildCardSearch
             List<int> tempArr = new List<int>();
             for (int i = 0; i < searchCharArr.Length; i++)
             {
+                if (valueIndex >= valueCharArr.Length)
+                    return false;
                 tempSearchChar = searchCharArr[i];
                 tempValueChar = valueCharArr[valueIndex];
                 if (tempSearchChar == '%')

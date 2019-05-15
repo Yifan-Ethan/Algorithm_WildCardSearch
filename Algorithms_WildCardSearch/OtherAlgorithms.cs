@@ -10,6 +10,7 @@ namespace Algorithms_WildCardSearch
 
         public static Boolean WildcardEquals(char[] value, char[] search)
         {
+            if (value.Length < search.Length) return false;
             for (int i = 0; i < search.Length; i++)
             {
                 if (!(search[i] == value[i]) && search[i] != '_') return false;
@@ -49,6 +50,7 @@ namespace Algorithms_WildCardSearch
 
         public static Char[] SubCharArray(Char[] array, int start)
         {
+            if (start < 0) return new char[0];
             char[] result = new char[array.Length - start];
             Array.Copy(array, start, result, 0, array.Length - start);
             return result;
