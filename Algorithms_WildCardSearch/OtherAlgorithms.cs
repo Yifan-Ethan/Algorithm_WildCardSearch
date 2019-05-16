@@ -63,16 +63,30 @@ namespace Algorithms_WildCardSearch
             return result;
         }
         
-        public static string RandomString(int length)
+        public static string RandomMatchString(int length)
         {
-            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            const string chars = "A";
             return new string(Enumerable.Repeat(chars, length)
               .Select(s => s[random.Next(s.Length)]).ToArray());
         }
 
-        public static string RandomSearchString(int length)
+        public static string RandomMatchSearchString(int length)
         {
-            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789%_";
+            const string chars = "A%_";
+            return new string(Enumerable.Repeat(chars, length)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+
+        public static string RandomMismatchString(int length)
+        {
+            const string chars = "B";
+            return new string(Enumerable.Repeat(chars, length)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+
+        public static string RandomMismatchSearchString(int length)
+        {
+            const string chars = "A%";
             return new string(Enumerable.Repeat(chars, length)
               .Select(s => s[random.Next(s.Length)]).ToArray());
         }
