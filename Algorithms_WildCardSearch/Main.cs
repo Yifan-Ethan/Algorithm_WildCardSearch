@@ -13,7 +13,7 @@ namespace Algorithms_WildCardSearch
 
             int i = 100;
             int k = 5;
-            
+
             //Measure time for dynamicSearch method - match
             var elapsedMs_naive = 0.0;
             var elapsedMs_TSIPS = 0.0;

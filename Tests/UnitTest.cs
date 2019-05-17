@@ -68,46 +68,46 @@ namespace Tests
             Assert.AreEqual(true, Naive.Run("%EFG", "ABCDEFG"));
 
             //Trailing percent test
-           Assert.AreEqual(true, Naive.Run("ABC%", "ABCDEFG"));
+            Assert.AreEqual(true, Naive.Run("ABC%", "ABCDEFG"));
 
             //Middle percent test
-           Assert.AreEqual(true, Naive.Run("ABC%EFG", "ABCDEFG"));
+            Assert.AreEqual(true, Naive.Run("ABC%EFG", "ABCDEFG"));
 
             //Leading underscore test
             Assert.AreEqual(true, Naive.Run("_BCDEFG", "ABCDEFG"));
 
             //Trailing underscore test
-          Assert.AreEqual(true, Naive.Run("ABCDEF_", "ABCDEFG"));
+            Assert.AreEqual(true, Naive.Run("ABCDEF_", "ABCDEFG"));
 
             //Middle underscore test
             Assert.AreEqual(true, Naive.Run("ABC_EFG", "ABCDEFG"));
 
             //Mixed wild card test
-           Assert.AreEqual(true, Naive.Run("_BCD%_", "ABCDEFG"));
+            Assert.AreEqual(true, Naive.Run("_BCD%_", "ABCDEFG"));
 
             //Repeated character test
-           Assert.AreEqual(true, Naive.Run("ABC%DEF", "ABCXXDDEF"));
+            Assert.AreEqual(true, Naive.Run("ABC%DEF", "ABCXXDDEF"));
 
             //Repeated pattern test
-           Assert.AreEqual(true, Naive.Run("ABC%FGHI%FGHI", "ABCFGHIFGHIFGHI"));
+            Assert.AreEqual(true, Naive.Run("ABC%FGHI%FGHI", "ABCFGHIFGHIFGHI"));
 
             //Multiple percent test
-           Assert.AreEqual(true, Naive.Run("ABC%EF%GHI%MNQ%XYZ", "ABCDEFGHIJKLMNQRSTUVWXYZ"));
+            Assert.AreEqual(true, Naive.Run("ABC%EF%GHI%MNQ%XYZ", "ABCDEFGHIJKLMNQRSTUVWXYZ"));
 
             //Search length test
-           Assert.AreEqual(true, Naive.Run("ABC%DEF", "ABCDEF"));
+            Assert.AreEqual(true, Naive.Run("ABC%DEF", "ABCDEF"));
 
             //Search length test 2
-           Assert.AreEqual(false, Naive.Run("ABC%DEFG", "ABCDEF"));
+            Assert.AreEqual(false, Naive.Run("ABC%DEFG", "ABCDEF"));
 
             //All percent test
-           Assert.AreEqual(true, Naive.Run("%%%%%%", "ABCDEF"));
+            Assert.AreEqual(true, Naive.Run("%%%%%%", "ABCDEF"));
 
             //Leading percent underscore mismatch test
-           Assert.AreEqual(false, Naive.Run("%_HIJKL", "ABCDEFG"));
+            Assert.AreEqual(false, Naive.Run("%_HIJKL", "ABCDEFG"));
 
             //Character following percent is last character in string mismatch test
-          Assert.AreEqual(false, Naive.Run("%GABCDE", "ABCDEFG"));
+            Assert.AreEqual(false, Naive.Run("%GABCDE", "ABCDEFG"));
         }
 
         [TestMethod]

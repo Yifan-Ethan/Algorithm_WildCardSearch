@@ -62,7 +62,7 @@ namespace Algorithms_WildCardSearch
             Array.Copy(array, start, result, 0, length);
             return result;
         }
-        
+
         public static string RandomMatchString(int length)
         {
             const string chars = "A";

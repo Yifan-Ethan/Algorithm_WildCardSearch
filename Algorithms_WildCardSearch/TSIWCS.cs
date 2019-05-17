@@ -19,10 +19,10 @@ namespace Algorithms_WildCardSearch
             if (searchCharArr.Length - percentIndex.Count > valueCharArr.Length) return false;
 
             var firstloop = true;
-            for (int i=0;i<percentIndex.Count;i++)
+            for (int i = 0; i < percentIndex.Count; i++)
             {
                 int index = percentIndex[i];
-                if (i > 0) index = index - percentIndex[i-1] - 1;
+                if (i > 0) index = index - percentIndex[i - 1] - 1;
 
                 var search_section = OtherAlgorithms.SubCharArray(searchCharArr, 0, index);
                 int containsindex = -1;
@@ -42,7 +42,7 @@ namespace Algorithms_WildCardSearch
                     valueCharArr = OtherAlgorithms.SubCharArray(valueCharArr, containsindex + search_section.Length);
                 }
 
-                searchCharArr = OtherAlgorithms.SubCharArray(searchCharArr, index+1);
+                searchCharArr = OtherAlgorithms.SubCharArray(searchCharArr, index + 1);
             }
 
             //Match trailing characters

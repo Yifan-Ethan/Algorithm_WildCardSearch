@@ -74,7 +74,7 @@ namespace Algorithms_WildCardSearch
                 if (!match) return false;
             }
 
-            if(value_index == value.Length)
+            if (value_index == value.Length)
             {
                 return true;
             }
